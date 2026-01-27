@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 
 <head >
     <meta charset="UTF-8">
@@ -9,63 +9,32 @@
     <link rel="stylesheet" style href="style.css">
 </head>
 
-<body style background="l">
-    <header >
-        <link rel="icon" type="image/x-icon" href="/images/favicon1.png">
-        <h1>Customer Relationship Management</h1>
-        <p>Área do utilizador</p>
-    
-        <!-- <p>Utilizador.getnome</p> -->
+<body>
+  <div id="header"></div>
 
-    </header>
+  <nav>
+    <button onclick="loadLeads()">Leads</button>
+    <button onclick="loadClientes()">Clientes</button>
+    <button onclick="loadProjetos()">Projetos</button>
+    <button onclick="loadTarefas()">Tarefas</button>
+  </nav>
 
+  <main>
+    <section id="leadsSection"></section>
+    <section id="clientesSection"></section>
+  </main>
 
-    <main>
+  <div id="footer"></div>
+  
+  <!-- depois de ler o file HTML é que vai carregar o file JS, podíamos ter posto este código na head do HTML com a palvra "defer" ex: <script src="app.js" defer></script> -->
+  <script src="aplicacao.js"></script>
 
-
-        <nav>
-            <button onclick="loadLeads()">Leads</button>
-            <button onclick="loadClientes()">Clientes</button>
-            <button onclick="loadProjetos()">Projetos</button>
-            <button onclick="loadTarefas()">Tarefas</button>
-        </nav>
-
-        <div>
-            <h3>Lista de Leads</h3>
-             <!-- Leads.titulo -->
-        </div>
-
-        <div>
-            <h3>Lista de Clientes</h3>
-        </div>
-
-        <div>
-            <h3>Lista de Projetos</h3>
-        </div>
-
-        <div>
-            <h3>Lista de Tarefas</h3>
-        </div>
-    </main>
-
-
-    <aside>
-
-    </aside>
-    
-    <!-- Deve incluir informações relevantes sobre o projeto, como créditos, política de privacidade ou links úteis -->
-    <footer>
-
-        <div>
-            <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-            </p>
-        </div>
-    </footer>
-
-    <!-- depois de ler o file HTML é que vai carregar o file JS, podíamos ter posto este código na head do HTML com a palvra "defer" ex: <script src="app.js" defer></script> -->
-    <script src="aplicacao.js"></script>
-
-
+  <script>
+    loadHeader();
+    loadFooter();
+    loadLeads();
+    loadClientes();
+  </script>
 </body>
+
 </html>
