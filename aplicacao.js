@@ -3,17 +3,44 @@ console.log("Aplicação iniciada.")
 
 const content = document.getElementById("content");
 
-function loadHeader() {
+document.addEventListener("DOMContentLoaded", () => {
+    
+    const form = document.getElementById("loginForm");
+    
+    if (form) {
+        form.addEventListener("submit", login);
+    }
+
+});
+
+
+function loadHeader(page) {
     const headerDiv = document.getElementById("header");
+    const currentPage = window.location.pathname;
+
+    if (currentPage.includes("login.html")) {
+        
+        headerDiv.innerHTML = `
+        <header id="header">
+        <img src="/images/favicon1.png" class="logo">
+        <h1>Customer Relationship Management</h1>
+
+        </header>
+    `
+
+    }else{
 
     headerDiv.innerHTML = `
-    <header>
-        <h1>Customer relationship Management</h1>
-        <p>Utilizador: nome</p>
-
+    <header id="header">
+        <img src="/images/favicon1.png" class="logo">
+        <h1>Customer Relationship Management</h1>
+        Welcome `+ localStorage.getItem("currentUser") + `
+        <a href="dashboard.html">
+        </a>
 
     </header>
     `
+}
 }
 
 function loadFooter() {
@@ -38,6 +65,16 @@ function loadClientes() {
     `
 }
 
+function login() {
+    const username = document.getElementById("username").value;
+
+    localStorage.setItem("currentUser", username);
+
+    console.log("Login efetuado com sucesso.");
+    console.log("Username guardado:", username);
+}
+
+
 // as 2 funções seguintes serão terminadas em projetos futuros
 function loadProjetos() {}
 
@@ -52,3 +89,10 @@ function loadDetalhes() {}
 function saveLead() {}
 
 function saveCliente() {}
+
+
+
+window.onload = function() {
+    loadHeader();
+    loadFooter();
+}

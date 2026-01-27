@@ -6,19 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Relationship Management</title>
     <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon1.png">
+    <script src="aplicacao.js" defer></script>
+
 </head>
-
-<body>
     
-    <header>
-
-    </header>
-
+<body>
+    <div id="header"></div>
 
     <main>
         <div class="login-container">
         <h2>Login</h2>
-        <di action="/login" method="post" id ="loginForm">
+        <div action="/login" method="post" id ="loginForm">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
             <br>
@@ -26,18 +26,13 @@
             <input type="password" id="password" name="password" required style="margin-left: 5px;">
             <br>
             <br>
-            <button type="submit">Login</button>
+            <button type="submit" onclick="login()">Login</button>
         </div>
        
 
     </main>
 
-    
-    <footer>
+    <div id="footer"></div>
 
-        
-    </footer>
-
-<script src="login.js"></script>
 </body>
 </html>
