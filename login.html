@@ -13,9 +13,18 @@
 </head>
     
 <body>
-    <div id="header"></div>
+
+    <header>
+        <div id="header"></div>
+    </header>
+    
 
     <main>
+        <div style="
+                width: 100%;
+                display: flex;
+                justify-content: center;">
+
         <div class="login-container">
         <h2>Login</h2>
         <div action="/login" method="post" id ="loginForm">
@@ -28,11 +37,17 @@
             <br>
             <button type="submit" onclick="login()">Login</button>
         </div>
+        </div>
+        </div>       
        
 
     </main>
 
-    <div id="footer"></div>
+    <footer>
+        <div id="footer"></div>
+    </footer>
+
+    
 
 </body>
 </html>

@@ -30,25 +30,42 @@ function loadHeader(page) {
 
     }else{
 
-    headerDiv.innerHTML = `
-    <header id="header">
-        <img src="/images/favicon1.png" class="logo">
-        <h1>Customer Relationship Management</h1>
-        Welcome `+ localStorage.getItem("currentUser") + `
-        <a href="dashboard.html">
-        </a>
+    headerDiv.innerHTML = 
+    `
+    <header class="header-app">
+        <div class="header-container">
+            <div class="header-left">
+                <img src="/images/favicon1.png" class="logo">
+                <h1>Customer Relationship Management</h1>
+                <br>
+                
+                </span>
+            </div>
+        
+
+            <div class="header-right">
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+
+        <div>
+            <span class="Welcome">
+                Welcome ${localStorage.getItem("currentUser")}
+        </div>
 
     </header>
-    `
+`
+;
+
 }
 }
 
 function loadFooter() {
     const footerDiv = document.getElementById("footer");
 
-    footerDiv.innerHTML = `
-    <p>@2026 all right reserved</p>
-    `
+    footerDiv.innerHTML = new Date().getFullYear() + ` © all right reserved`
+    footerDiv.style.
+    text-align; center;
 }
 
 function loadLeads() {
@@ -72,6 +89,14 @@ function login() {
 
     console.log("Login efetuado com sucesso.");
     console.log("Username guardado:", username);
+
+    window.location.href = "dashboard.html";
+}
+
+function logout() {
+    localStorage.removeItem("currentUser");
+    console.log("Logout efetuado com sucesso.");
+    window.location.href = "login.html";
 }
 
 
