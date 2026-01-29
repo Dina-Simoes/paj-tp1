@@ -12,19 +12,24 @@
 
 
 <body>
-  <div id="header"></div>
 
-  <aside>
+  <header>  
+    <div id="header"></div>
+  </header>
+  
 
+  <aside class="sidebar">
     <button onclick="loadLeads()">Leads</button>
+    <br>
     <button onclick="loadClientes()">Clientes</button>
+    <br>
     <button onclick="loadProjetos()">Projetos</button>
+    <br>
     <button onclick="loadTarefas()">Tarefas</button>
-
-
+  
   </aside>
 
-  <main>
+  <main id="content">
     <div>
     <section id="leadsSection"></section>
     <section id="clientesSection"></section>

@@ -102,9 +102,19 @@ function logout() {
 
 
 // as 2 funções seguintes serão terminadas em projetos futuros
-function loadProjetos() {}
+function loadProjetos() {
+    content.innerHTML = `
+    <h2>Projetos</h2>
+    <p>Funcionalidade futura</p>
+    `
+}
 
-function loadTarefas() {}
+function loadTarefas() {
+    content.innerHTML = `
+    <h2>Tarefas</h2>
+    <p>Funcionalidade futura</p>
+    `
+}
 
 
 function loadLogin() {}
