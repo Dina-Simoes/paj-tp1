@@ -45,11 +45,12 @@ function loadHeader(page) {
 
             <div class="header-right">
                 <button class="logout-btn" onclick="logout()">Logout</button>
+                
             </div>
         </div>
 
-        <div>
-            <span class="Welcome">
+        <div class="header-welcome">
+            <span class="Welcome"> 
                 Welcome ${localStorage.getItem("currentUser")}
         </div>
 

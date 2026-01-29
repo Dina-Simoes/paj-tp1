@@ -21,17 +21,26 @@ header {  background:rgb(62, 62, 170);
 
 .header-right {
     display: flex;
-    align-items:center;
+    align-items: end;
+    margin-left: 0;
 }
 
 .logout-btn {
     cursor: pointer;
+    hover {
+        transform: scale(1.05);
+    }
 }
 
 .header-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.header-welcome {
+    font-size: 18px;
+    margin-left: 110px;
 }
 
 
