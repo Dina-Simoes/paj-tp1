@@ -7,13 +7,6 @@ var cliente = {nome : "", email : "", telefone : "", empresa : ""};
 // Array de clientes
 let clienteList = new Array();
 
-window.onload = function() {
-    // fallback - adicionado "|| []" - se não existir nenhum cliente devolve array vazio
-    clienteList = JSON.parse(localStorage.getItem("clientes") || "[]");
-    
-    
-
-}
 
 // Função para adicionar um cliente
 function adicionarCliente(nome, email, telefone, empresa) {
@@ -31,13 +24,20 @@ function adicionarCliente(nome, email, telefone, empresa) {
 }
 
 function guardarNovoCliente() {
-  const name = document.getElementById("clienteNome").value;
-  const email = document.getElementById("clienteEmail").value;
-  const telefone = document.getElementById("clienteTelefone").value;
-  const empresa = document.getElementById("clienteEmpresa").value;
+    console.log("1) cliquei Guardar");
 
-  adicionarCliente(name, email, telefone, empresa);
-  loadClientes();
+    const nome = document.getElementById("clienteNome").value;
+    const email = document.getElementById("clienteEmail").value;
+    const telefone = document.getElementById("clienteTelefone").value;
+    const empresa = document.getElementById("clienteEmpresa").value;
+
+    console.log("2) dados lidos:", nome, email, telefone, empresa);
+
+    adicionarCliente(nome, email, telefone, empresa);
+    console.log("3) depois de adicionarCliente");
+
+    loadClientes();
+    console.log("4) depois de loadClientes");
 }
 
 
@@ -52,7 +52,7 @@ function listarClientes() {
     // // ordena os clientes por ordem alfabetica
     // // localeCompare compara strings, sort - ordena
     // clienteList.sort(function(a, b) {
-    //     return a.name.localeCompare(b.name);
+    //     return a.nome.localeCompare(b.nome);
     // });
 
     for (var i = 0; i < clienteList.length; i++) {

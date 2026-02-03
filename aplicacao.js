@@ -21,44 +21,36 @@ function loadHeader(page) {
     if (currentPage.includes("login.html")) {
         
         headerDiv.innerHTML = `
-        <header id="header">
-        <img src="images/favicon1.png" class="logo">
-        <h1>Customer Relationship Management</h1>
-
-        </header>
-    `
-
-    }else{
-
-    headerDiv.innerHTML = 
-    `
-    <header class="header-app">
-        <div class="header-container">
-            <div class="header-left">
+            <header id="header">
                 <img src="/images/favicon1.png" class="logo">
                 <h1>Customer Relationship Management</h1>
-                <br>
-                
-                </span>
-            </div>
+
+            </header>
+        `;
+
+    } else{
+
+        const user = localStorage.getItem("currentUser") || "";
+        headerDiv.innerHTML = `
         
-
-            <div class="header-right">
-                <button class="logout-btn" onclick="logout()">Logout</button>
+            <header class="header-app">
+                <div class="header-container">
+                    <div class="header-left">
+                        <img src="/images/favicon1.png" class="logo">
+                        <h1>Customer Relationship Management</h1>
+                    </div>
                 
-            </div>
-        </div>
+                    <div class="header-right">
+                        <button class="logout-btn" onclick="logout()">Logout</button>
+                    </div>
+                </div>
 
-        <div class="header-welcome">
-            <span class="Welcome"> 
-                Welcome ${localStorage.getItem("currentUser")}
-        </div>
-
-    </header>
-`
-;
-
-}
+                <div class="header-welcome">
+                    <span class="Welcome">Welcome ${user}</span>
+                </div>
+            </header>
+        `;
+    }
 }
 
 function loadFooter() {
@@ -112,8 +104,8 @@ function loadNovoCliente() {
     <br>
     <br>
 
-    <button onclick="guardarNovoCliente()">Guardar</button>
-    <button onclick="loadClientes()">Cancelar</button>
+    <button type="button" onclick="guardarNovoCliente()">Guardar</button>
+    <button type="button" onclick="loadClientes()">Cancelar</button>
   `;
 }
 
@@ -165,4 +157,8 @@ function saveCliente() {}
 window.onload = function() {
     loadHeader();
     loadFooter();
+
+    // carrega clientes do localStorage
+    // fallback - adicionado "|| []" - se não existir nenhum cliente devolve array vazio
+    clienteList = JSON.parse(localStorage.getItem("clientes") || "[]");
 }
