@@ -65,9 +65,23 @@ function loadFooter() {
 function loadLeads() {
     content.innerHTML = `
     <h2>Leads</h2>
-    <p>Lista de Leads</p>
+
+    <ul id="listaLeads"></ul>
+
+    <button type="button" onclick="loadNovoLead()">Adicionar Lead</button>
     `;
 }
+
+function loadNovoLead() {
+    content.innerHTML = `
+    <h2>Nova Lead</h2>
+
+    
+
+
+    `;
+}
+
 
 function loadClientes() {
     content.innerHTML = `

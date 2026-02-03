@@ -7,6 +7,8 @@ var lead = {titulo : "", descrição : "", estado : ""};
 // Array de leads
 let leadsList = new Array();
 
+// opções de estado para as leads
+
 const statusOptions = ["Novo", "Em análise", "Proposta", "Ganho", "Perdido"];
 
 
@@ -36,8 +38,12 @@ function criarLead(titulo, descrição) {
 function adicionarLead() {
     const lead = criarLead(titulo, descrição);
     leadsList.push(lead);
-    guardarLeads();   
+    guardarLeads();
+    
+    console.log("Lead adicionada:", lead);
+
 }
+
 
 // Função para guardar leads no localStorage
 
@@ -54,6 +60,36 @@ function editarLead(id, novosDados) {
 
     guardarLeads();
 }
+
+
+function removerLead(id) {
+    leadsList = leadsList.filter(l => l.id !== id);
+    guardarLeads();
+}
+
+function carregarLeads() {
+    const dados = JSON.parse(localStorage.getItem("leads"));
+    if (dados) {
+        leadsList = dados;
+    }
+}
+
+function listarLeads() {
+    const listaLeads = document.getElementById("listaLeads");
+    listaLeads.innerHTML = ""; // Limpa a lista antes de adicionar novos elementos  
+    for (let i = 0; i < leadsList.length; i++) {
+        const lead = leadsList[i];
+        listaLeads.innerHTML += `
+            <li>
+                <strong>${lead.titulo}</strong> - ${lead.descrição} [${lead.estado}]
+                <button onclick="editarLead(${lead.id}, {titulo: 'Novo Título', descricao: 'Nova Descrição'})">Editar</button>
+                <button onclick="removerLead(${lead.id})">Remover</button>
+            </li>
+        `;
+    }
+}
+
+
 
 
 

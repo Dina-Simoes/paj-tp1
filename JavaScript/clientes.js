@@ -178,3 +178,10 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+function carregarClientes() {
+    const dados = JSON.parse(localStorage.getItem("clientes"));
+    if (dados) {
+        clienteList = dados;
+    }
+}
+
