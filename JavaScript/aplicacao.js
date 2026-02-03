@@ -62,6 +62,8 @@ function loadFooter() {
     footerDiv.style.textAlign = "left";
 }
 
+// Funções para carregar as Leads
+
 function loadLeads() {
     content.innerHTML = `
     <h2>Leads</h2>
@@ -70,6 +72,8 @@ function loadLeads() {
 
     <button type="button" onclick="loadNovoLead()">Adicionar Lead</button>
     `;
+
+    listarLeads();
 }
 
 function loadNovoLead() {
@@ -85,10 +89,12 @@ function loadNovoLead() {
     <br><br>
 
     <button type="button" onclick="adicionarLead()"><img src="/imagens/guardar.jpg" alt="icon" class="icon">Guardar</button>
+    <button type="button" onclick="loadLeads()"><img src="/imagens/remover.jpg" alt="icon" class="icon">Cancelar</button>
 
     `;
 }
 
+// Funções para carregar os Clientes
 
 function loadClientes() {
     content.innerHTML = `
@@ -128,6 +134,8 @@ function loadNovoCliente() {
   `;
 }
 
+// Funções de login e logout
+
 function login() {
     const username = document.getElementById("username").value;
 
@@ -161,21 +169,14 @@ function loadTarefas() {
     `;
 }
 
+// Função para inicializar a aplicação
 
 window.onload = function() {
     loadHeader();
     loadFooter();
-
-    // carrega clientes do localStorage
-    // fallback - adicionado "|| []" - se não existir nenhum cliente devolve array vazio
-    clienteList = JSON.parse(localStorage.getItem("clientes") || "[]");
+    carregarClientes();
+    carregarLeads();
+    
 }
 
-
-// apagar  ????????
-function loadLogin() {}
-function loadDetalhes() {}
-// mais tarde, completar as seguintes funções
-function saveLead() {}
-function saveCliente() {}
 

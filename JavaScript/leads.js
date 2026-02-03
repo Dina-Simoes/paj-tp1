@@ -36,19 +36,20 @@ function criarLead(titulo, descrição) {
 // Função para adicionar uma lead
 
 function adicionarLead() {
+    titulo = document.getElementById("leadTitulo").value;
+    descrição = document.getElementById("leadDescricao").value;
     const lead = criarLead(titulo, descrição);
     leadsList.push(lead);
     guardarLeads();
-    
     console.log("Lead adicionada:", lead);
-
+    loadLeads();
 }
 
 
 // Função para guardar leads no localStorage
 
 function guardarLeads() {
-    localStorage.setItem("leads", JSON.stringify(leadsList));
+    localStorage.setItem("leadsList", JSON.stringify(leadsList));
 }
 
 function editarLead(id, novosDados) {
@@ -68,7 +69,7 @@ function removerLead(id) {
 }
 
 function carregarLeads() {
-    const dados = JSON.parse(localStorage.getItem("leads"));
+    const dados = JSON.parse(localStorage.getItem("leadsList"));
     if (dados) {
         leadsList = dados;
     }
@@ -76,14 +77,12 @@ function carregarLeads() {
 
 function listarLeads() {
     const listaLeads = document.getElementById("listaLeads");
-    listaLeads.innerHTML = ""; // Limpa a lista antes de adicionar novos elementos  
+    listaLeads.innerHTML = ""; // Limpa a lista antes de preencher
+
     for (let i = 0; i < leadsList.length; i++) {
-        const lead = leadsList[i];
         listaLeads.innerHTML += `
             <li>
-                <strong>${lead.titulo}</strong> - ${lead.descrição} [${lead.estado}]
-                <button onclick="editarLead(${lead.id}, {titulo: 'Novo Título', descricao: 'Nova Descrição'})">Editar</button>
-                <button onclick="removerLead(${lead.id})">Remover</button>
+                <strong>${leadsList[i].titulo}</strong>
             </li>
         `;
     }
