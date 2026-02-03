@@ -1,0 +1,30 @@
+.sidebar {
+    background:rgb(54, 54, 140);
+    padding: 30%;
+    position:relative;
+    width: 30%;
+    height: auto;
+    align-items: left;
+}
+
+.sidebar button {
+    background: none;
+    border:#ffffff;
+    border-radius: 100px;
+    color: white;
+    padding: 20px;
+    text-align: left;
+    cursor: pointer;
+    width: 100px;
+}
+
+.sidebar button:hover {
+    background-color: #34495e;
+}
+
+
+main { 
+    padding: 20px; 
+    grid-column: 2;
+    grid-row: 2;
+}

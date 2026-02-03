@@ -56,39 +56,6 @@ body {
      
 }
 
-.sidebar {
-    background:rgb(62, 62, 170);
-    padding: 50px;
-    position:relative;
-    width: 50px;
-    height: auto;
-    align-items: left;
-}
-
-.sidebar button {
-    background: none;
-    border:#ffffff;
-    border-radius: 100px;
-    color: white;
-    padding: 10px;
-    text-align: left;
-    cursor: pointer;
-    width: 100px;
-}
-
-.sidebar button:hover {
-    background-color: #34495e;
-}
-
-
-main { 
-    padding: 20px; 
-    grid-column: 2;
-    grid-row: 2;
-}
-
-
-
 
 footer { 
     background-color: rgb(237, 232, 232); 
