@@ -76,8 +76,15 @@ function loadNovoLead() {
     content.innerHTML = `
     <h2>Nova Lead</h2>
 
-    
+    <label>Título</label>
+    <input id="leadTitulo" type="text">
+    <br><br>
 
+    <label>Descrição</label>
+    <input id="leadDescricao" type="text">
+    <br><br>
+
+    <button type="button" onclick="adicionarLead()"><img src="/imagens/guardar.jpg" alt="icon" class="icon">Guardar</button>
 
     `;
 }
