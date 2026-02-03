@@ -97,14 +97,10 @@ function mostrarDetalhesCliente() {
 }
 
 function listarClientes() {
+    
     var listaClientes = document.getElementById("listaClientes");
     listaClientes.innerHTML = ""; // Limpa a lista antes de adicionar novos elementos
 
-    // ordena os clientes por ordem alfabetica
-    // localeCompare compara strings, sort - ordena, neste caso por ordem alfabetica
-    clienteList.sort(function(a, b) {
-        return a.nome.localeCompare(b.nome);
-    });
 
     for (var i = 0; i < clienteList.length; i++) {
 
