@@ -18,6 +18,11 @@ function adicionarCliente(nome, email, telefone, empresa) {
     clienteList.push(novoCliente); 
 
     // guarda no localStorage
+    // ordena os clientes por ordem alfabetica
+    // localeCompare compara strings, sort - ordena, neste caso por ordem alfabetica
+    clienteList.sort(function(a, b) {
+        return a.nome.localeCompare(b.nome);
+    });
     localStorage.setItem("clientes", JSON.stringify(clienteList));
 
     console.log("Cliente adicionado:", novoCliente);
@@ -40,6 +45,8 @@ function guardarCliente(index = null) {
     // se o index for null => o cliente ainda não existe, é um novo cliente
     if (index === null) {
     adicionarCliente(nome, email, telefone, empresa);
+    console.log("Lista de clientes após adição:", clienteList);
+
     } else {
     // editar cliente já existente
     clienteList[index].nome = nome;
@@ -80,9 +87,9 @@ function mostrarDetalhesCliente() {
         
         <br>
 
-        <button type="button" onclick="editarCliente(${index})">Editar</button>
-        <button type="button" onclick="removerCliente(${index})">Remover</button>
-        <button onclick="window.location.href='dashboard.html#clientes'">Voltar</button>
+        <button type="button" onclick="editarCliente(${index})"><img src="/imagens/editar.jpg" alt="icon" class="icon">Editar</button>
+        <button type="button" onclick="removerCliente(${index})"><img src="/imagens/remover.jpg" alt="icon" class="icon">Remover</button>
+        <button onclick="window.location.href='dashboard.html#clientes'"><img src="/imagens/voltar.jpg" alt="icon" class="icon">Voltar</button>
 
     
     `;
@@ -109,7 +116,10 @@ function listarClientes() {
             </li>
             `;
     }
+
+    console.log("Lista de clientes após ordenação:", clienteList);
 }
+
 
 function abrirDetalhesCliente(index) {
   localStorage.setItem("clienteSelecionado", index);

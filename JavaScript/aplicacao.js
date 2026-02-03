@@ -24,7 +24,7 @@ function loadHeader(page) {
         
         headerDiv.innerHTML = `
             <header id="header">
-                <img src="/images/favicon1.png" class="logo">
+                <img src="/imagens/favicon1.png" class="logo">
                 <h1>Customer Relationship Management</h1>
 
             </header>
@@ -38,12 +38,12 @@ function loadHeader(page) {
             <header class="header-app">
                 <div class="header-container">
                     <div class="header-left">
-                        <img src="/images/favicon1.png" class="logo">
+                        <img src="/imagens/favicon1.png" class="logo">
                         <h1>Customer Relationship Management</h1>
                     </div>
                 
                     <div class="header-right">
-                        <button class="logout-btn" onclick="logout()">Logout</button>
+                        <button class="logout-btn" onclick="logout()"><img src="/imagens/logout.jpg" alt="icon" class="icon">Logout</button>
                     </div>
                 </div>
 
@@ -76,7 +76,7 @@ function loadClientes() {
     <!-- lista não ordenada de clientes -->
     <ul id="listaClientes"></ul> 
 
-    <button type="button"onclick="loadNovoCliente()">Adicionar Cliente</button>
+    <button type="button"onclick="loadNovoCliente()"><img src="/imagens/adicionar.jpg" alt="icon" class="icon">Adicionar Cliente</button>
     `;
     
     listarClientes();
@@ -102,8 +102,8 @@ function loadNovoCliente() {
     <input id="clienteEmpresa" type="text">
     <br><br>
 
-    <button type="button" onclick="guardarCliente()">Guardar</button>
-    <button type="button" onclick="loadClientes()">Cancelar</button>
+    <button type="button" onclick="guardarCliente()"><img src="/imagens/guardar.jpg" alt="icon" class="icon">Guardar</button>
+    <button type="button" onclick="loadClientes()"><img src="/imagens/remover.jpg" alt="icon" class="icon">Cancelar</button>
   `;
 }
 
