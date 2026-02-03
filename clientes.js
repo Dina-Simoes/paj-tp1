@@ -103,9 +103,8 @@ function listarClientes() {
 
         listaClientes.innerHTML += `
             <li>
-                <strong>Nome:</strong> ${clienteList[i].nome} <br>
 
-                <button type="button" onclick="abrirDetalhesCliente(${i})">Detalhes</button>
+                <button type="button" onclick="abrirDetalhesCliente(${i})"><strong>${clienteList[i].nome}</strong></button>
 
             </li>
             `;
