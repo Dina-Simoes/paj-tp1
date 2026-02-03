@@ -58,8 +58,38 @@ function guardarCliente(index = null) {
 
 
 // Função para listar todos os clientes
-function listarClientes() {
+function mostrarDetalhesCliente() {
+    
+    // carregar lista do localStorage
+    clienteList = JSON.parse(localStorage.getItem("clientes") || "[]");
 
+    const index = parseInt(localStorage.getItem("clienteSelecionado"), 10);
+    const detalhesDiv = document.getElementById("detalhesContent");
+
+    if (!detalhesDiv) return;
+
+   
+    const c = clienteList[index];
+
+    detalhesDiv.innerHTML = `
+
+        <p><strong>Nome:</strong> ${c.nome}</p>
+        <p><strong>Email:</strong> ${c.email}</p>
+        <p><strong>Telefone:</strong> ${c.telefone}</p>
+        <p><strong>Empresa:</strong> ${c.empresa}</p> 
+        
+        <br>
+
+        <button type="button" onclick="editarCliente(${index})">Editar</button>
+        <button type="button" onclick="removerCliente(${index})">Remover</button>
+        <button onclick="window.location.href='dashboard.html#clientes'">Voltar</button>
+
+    
+    `;
+    
+}
+
+function listarClientes() {
     var listaClientes = document.getElementById("listaClientes");
     listaClientes.innerHTML = ""; // Limpa a lista antes de adicionar novos elementos
 
@@ -72,18 +102,21 @@ function listarClientes() {
     for (var i = 0; i < clienteList.length; i++) {
 
         listaClientes.innerHTML += `
-        <li>
-            <strong>Nome:</strong> ${clienteList[i].nome} <br>
-            <strong>Email:</strong> ${clienteList[i].email} <br>
-            <strong>Telefone:</strong> ${clienteList[i].telefone} <br>
-            <strong>Empresa:</strong> ${clienteList[i].empresa} <br><br>
+            <li>
+                <strong>Nome:</strong> ${clienteList[i].nome} <br>
 
-            <button type="button" onclick="editarCliente(${i})">Editar</button>
-            <button type="button" onclick="removerCliente(${i})">Remover</button>
-        </li>
-        `;
+                <button type="button" onclick="abrirDetalhesCliente(${i})">Detalhes</button>
+
+            </li>
+            `;
     }
 }
+
+function abrirDetalhesCliente(index) {
+  localStorage.setItem("clienteSelecionado", index);
+  window.location.href = "detalhes.html";
+}
+
 
 // Função para remover um cliente
 function removerCliente(index) {
@@ -128,4 +161,11 @@ function editarCliente(index) {
     <button type="button" onclick="loadClientes()">Cancelar</button>
     `;
 }
+           
+
+document.addEventListener("DOMContentLoaded", function() {
+    if (document.getElementById("detalhesContent")) {
+        mostrarDetalhesCliente();
+    }
+});
 
