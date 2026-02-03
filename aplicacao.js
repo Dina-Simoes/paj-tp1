@@ -1,3 +1,5 @@
+// aplicacao.js - ficheiro principal da aplicação
+
 // para apagar mais tarde
 console.log("Aplicação iniciada.")
 
@@ -74,7 +76,7 @@ function loadClientes() {
     <!-- lista não ordenada de clientes -->
     <ul id="listaClientes"></ul> 
 
-    <button onclick="loadNovoCliente()">Adicionar Cliente</button>
+    <button type="button"onclick="loadNovoCliente()">Adicionar Cliente</button>
     `;
     
     listarClientes();
@@ -86,25 +88,21 @@ function loadNovoCliente() {
 
     <label>Nome</label>
     <input id="clienteNome" type="text">
-    <br>
-    <br>
+    <br><br>
 
     <label>Email</label>
     <input id="clienteEmail" type="email">
-    <br>
-    <br>
+    <br><br>
 
     <label>Telefone</label>
     <input id="clienteTelefone" type="text">
-    <br>
-    <br>
+    <br><br>
 
     <label>Empresa</label>
     <input id="clienteEmpresa" type="text">
-    <br>
-    <br>
+    <br><br>
 
-    <button type="button" onclick="guardarNovoCliente()">Guardar</button>
+    <button type="button" onclick="guardarCliente()">Guardar</button>
     <button type="button" onclick="loadClientes()">Cancelar</button>
   `;
 }
@@ -127,7 +125,7 @@ function logout() {
 }
 
 
-// as 2 funções seguintes serão terminadas em projetos futuros
+// as funções seguintes serão terminadas em projetos futuros
 function loadProjetos() {
     content.innerHTML = `
     <h2>Projetos</h2>
@@ -143,17 +141,6 @@ function loadTarefas() {
 }
 
 
-function loadLogin() {}
-
-function loadDetalhes() {}
-
-// mais tarde, completar as seguintes funções
-function saveLead() {}
-
-function saveCliente() {}
-
-
-
 window.onload = function() {
     loadHeader();
     loadFooter();
@@ -162,3 +149,12 @@ window.onload = function() {
     // fallback - adicionado "|| []" - se não existir nenhum cliente devolve array vazio
     clienteList = JSON.parse(localStorage.getItem("clientes") || "[]");
 }
+
+
+// apagar  ????????
+function loadLogin() {}
+function loadDetalhes() {}
+// mais tarde, completar as seguintes funções
+function saveLead() {}
+function saveCliente() {}
+
