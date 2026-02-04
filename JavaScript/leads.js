@@ -1,7 +1,7 @@
 // ficheiro responsável pela gestão de leads (adicionar, listar por estado, editar e remover) com persistência em localStorage
 
 // objeto lead
-var lead = {titulo : "", descrição : "", estado : ""};
+var lead = {titulo : "", descricao : "", estado : ""};
 
 
 // Array de leads
@@ -22,11 +22,11 @@ function gerarID() {
 }
 
 // Função para criar uma lead
-function criarLead(titulo, descrição) {
+function criarLead(titulo, descricao) {
     return{
         id:gerarID(),
         titulo: titulo,
-        descrição: descrição,
+        descricao: descricao,
         estado: statusOptions[0]  // define o status inicial como "Novo"
 
     }
@@ -37,8 +37,8 @@ function criarLead(titulo, descrição) {
 
 function adicionarLead() {
     titulo = document.getElementById("leadTitulo").value;
-    descrição = document.getElementById("leadDescricao").value;
-    const lead = criarLead(titulo, descrição);
+    descricao = document.getElementById("leadDescricao").value;
+    const lead = criarLead(titulo, descricao);
     leadsList.push(lead);
     guardarLeads();
     console.log("Lead adicionada:", lead);
@@ -54,14 +54,17 @@ function guardarLeads() {
 
 // Função para editar uma lead
 
-function editarLead(id, novosDados) {
-    const lead = leadsList.find(l => l.id === id);
+function guardarEdicao(id) {
+    const lead = leadsList.find(l => l.id == id);
     if (!lead) return;
 
-    lead.titulo = novosDados.titulo;
-    lead.descricao = novosDados.descricao;
+    lead.titulo = document.getElementById("editTitulo").value;
+    lead.descricao = document.getElementById("editDescricao").value;
+    lead.estado = document.getElementById("editEstado").value;
 
     guardarLeads();
+
+    alert("Lead atualizada com sucesso");
 }
 
 // Função para mostrar detalhes de uma lead
@@ -108,16 +111,18 @@ function listarLeads() {
 // Função para abrir os detalhes de um Lead na página de detalhes
 
 function abrirDetalhesLead(id) {
-    window.location.href="detalhesLeads.html?id="+id;
-    
-    
+    window.location.href="detalhesLeads.html?id="+id;    
 }
 
 // Função para remover uma lead
 
 function removerLead(id) {
-    leadsList = leadsList.filter(l => l.id !== id);
+    if (!confirm("Tem a certeza que deseja remover esta lead?")) return;
+
+    leadsList = leadsList.filter(l => l.id != id);
     guardarLeads();
+
+    window.location.href = "dashboard.html#leads";
 }
 
 // Função para carregar leads do localStorage
@@ -136,6 +141,8 @@ function getLeads(){
 
 function init(){
 
+    carregarLeads();
+
     const id = getQueryParam("id");
 
     console.log(id);
@@ -152,15 +159,26 @@ function init(){
 
     content.innerHTML = `
         <h2>Detalhes da Lead</h2>
-        <p><strong>Título:</strong> ${lead.titulo}</p>
-        <p><strong>Descrição:</strong> ${lead.descrição}</p>
-        <p><strong>Estado:</strong> ${lead.estado}</p>
-        <br>
-        <button type="button" onclick="editarLead(id,novosdados)"><img src="/imagens/editar.jpg" alt="icon" class="icon">Editar</button>
-        <button type="button" onclick="removerLead(id)"><img src="/imagens/remover.jpg" alt="icon" class="icon">Remover</button>
-        <button onclick="window.location.href='dashboard.html#leads'"><img src="/imagens/voltar.jpg" alt="icon" class="icon">Voltar</button>
-    `;
 
+    <label>Título</label><br>
+    <input type="text" id="editTitulo" value="${lead.titulo}"><br><br>
+
+    <label>Descrição</label><br>
+    <textarea id="editDescricao">${lead.descricao}</textarea><br><br>
+
+    <label>Estado</label><br>
+    <select id="editEstado">
+        ${statusOptions.map(s =>
+            `<option value="${s}" ${s === lead.estado ? "selected" : ""}>${s}</option>`
+        ).join("")}
+    </select>
+
+    <br><br>
+
+    <button onclick="guardarEdicao(${lead.id})">Guardar</button>
+    <button onclick="removerLead(${lead.id})">Remover</button>
+    <button onclick="window.location.href='dashboard.html#leads'">Voltar</button>
+    `
 }
 
 function getQueryParam(name, url = window.location.href) {
