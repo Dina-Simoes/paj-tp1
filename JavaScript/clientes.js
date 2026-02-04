@@ -61,6 +61,7 @@ function guardarCliente(index = null) {
     }
 
     loadClientes();
+    window.location.href="dashboard.html#clientes"
 }
 
 
@@ -163,7 +164,7 @@ function editarCliente(index) {
     <br><br>
 
     <button type="button" onclick="guardarCliente(${index})">Guardar</button>
-    <button type="button" onclick="loadClientes()">Cancelar</button>
+    <button onclick="window.location.href='dashboard.html#clientes'"><img src="/imagens/voltar.jpg" alt="icon" class="icon">Cancelar</button>
     `;
 }
            
