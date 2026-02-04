@@ -52,6 +52,8 @@ function guardarLeads() {
     localStorage.setItem("leadsList", JSON.stringify(leadsList));
 }
 
+// Função para editar uma lead
+
 function editarLead(id, novosDados) {
     const lead = leadsList.find(l => l.id === id);
     if (!lead) return;
@@ -62,31 +64,114 @@ function editarLead(id, novosDados) {
     guardarLeads();
 }
 
+// Função para mostrar detalhes de uma lead
+
+function mostrarDetalhesLead(id) {
+    const lead = leadsList.find(l => l.id === id);
+
+    if (!lead) {
+        content.innerHTML = "<p>Lead não encontrada</p>";
+        return;
+    }
+
+    content.innerHTML = `
+        <h2>Detalhes da Lead</h2>
+
+        <p><strong>ID:</strong> ${lead.id}</p>
+        <p><strong>Título:</strong> ${lead.titulo}</p>
+        <p><strong>Descrição:</strong> ${lead.descrição}</p>
+        <p><strong>Estado:</strong> ${lead.estado}</p>
+
+        <button onclick="loadLeads()">Voltar</button>
+    `;
+}
+
+// Função para listar as leads
+
+function listarLeads() {
+    const listaLeads = document.getElementById("listaLeads");
+    listaLeads.innerHTML = ""; // limpa antes de preencher
+
+    for (let i = 0; i < leadsList.length; i++) {
+        listaLeads.innerHTML += `
+            <div class="lead-item">
+                <button onclick="abrirDetalhesLead(${leadsList[i].id})">
+                    <strong>${leadsList[i].titulo}</strong>
+                </button>
+            </div>
+        `;
+    }
+}
+
+
+
+// Função para abrir os detalhes de um Lead na página de detalhes
+
+function abrirDetalhesLead(id) {
+    window.location.href="detalhesLeads.html?id="+id;
+    
+    
+}
+
+// Função para remover uma lead
 
 function removerLead(id) {
     leadsList = leadsList.filter(l => l.id !== id);
     guardarLeads();
 }
 
+// Função para carregar leads do localStorage
+
 function carregarLeads() {
-    const dados = JSON.parse(localStorage.getItem("leadsList"));
+    const dados = getLeads();
     if (dados) {
         leadsList = dados;
     }
 }
 
-function listarLeads() {
-    const listaLeads = document.getElementById("listaLeads");
-    listaLeads.innerHTML = ""; // Limpa a lista antes de preencher
-
-    for (let i = 0; i < leadsList.length; i++) {
-        listaLeads.innerHTML += `
-            <li>
-                <strong>${leadsList[i].titulo}</strong>
-            </li>
-        `;
-    }
+function getLeads(){
+    return JSON.parse(localStorage.getItem("leadsList"));
 }
+
+
+function init(){
+
+    const id = getQueryParam("id");
+
+    console.log(id);
+    console.log(getLeads());
+
+    const lead = getLeads().find(l => l.id == id);
+
+    const content = document.getElementById("content");
+
+    if (!lead) {
+        alert("Lead não encontrada");
+        return;
+    }
+
+    content.innerHTML = `
+        <h2>Detalhes da Lead</h2>
+        <p><strong>Título:</strong> ${lead.titulo}</p>
+        <p><strong>Descrição:</strong> ${lead.descrição}</p>
+        <p><strong>Estado:</strong> ${lead.estado}</p>
+        <br>
+        <button type="button" onclick="editarLead(id,novosdados)"><img src="/imagens/editar.jpg" alt="icon" class="icon">Editar</button>
+        <button type="button" onclick="removerLead(id)"><img src="/imagens/remover.jpg" alt="icon" class="icon">Remover</button>
+        <button onclick="window.location.href='dashboard.html#leads'"><img src="/imagens/voltar.jpg" alt="icon" class="icon">Voltar</button>
+    `;
+
+}
+
+function getQueryParam(name, url = window.location.href) {
+  const params = new URL(url).searchParams;
+  return params.has(name) ? params.get(name) : null;
+}
+
+
+
+
+
 
 
 

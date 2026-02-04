@@ -82,7 +82,7 @@ function mostrarDetalhesCliente() {
 
         <p><strong>Nome:</strong> ${c.nome}</p>
         <p><strong>Email:</strong> ${c.email}</p>
-        <p><strong>Telefone:</strong> ${c.telefone}</p>
+        <p><strong>Telefone:</strong> ${c.telefone}</p> 
         <p><strong>Empresa:</strong> ${c.empresa}</p> 
         
         <br>

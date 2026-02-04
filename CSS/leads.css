@@ -1,22 +1,27 @@
-.listaLeads {
-    list-style-type:lower-alpha;
+#leadslist {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lead-item {
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.lead-item button {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
     padding: 0;
 }
 
-#listaLeads li {
+.lead-item button:hover {
     background-color: #f1f1f1;
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-#listaLeads li button {
-    float: right;
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 3px;
-    cursor: pointer;
 }
