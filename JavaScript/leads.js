@@ -99,12 +99,14 @@ function listarLeads() {
         listaLeads.innerHTML += `
             <div class="lead-item">
                 <button onclick="abrirDetalhesLead(${leadsList[i].id})">
-                    <strong>${leadsList[i].titulo}</strong>
+                    <strong>${leadsList[i].titulo}</strong> <h5>Estado: ${leadsList[i].estado}</h5>
                 </button>
             </div>
         `;
     }
 }
+
+
 
 
 
