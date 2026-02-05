@@ -134,19 +134,24 @@ function listarLeadsPorEstado(estado) {
 // Função para listar as leads
 
 function listarLeads() {
-    const listaLeads = document.getElementById("listaLeads");
-    listaLeads.innerHTML = ""; // limpa antes de preencher
+     const listaLeads = document.getElementById("listaLeads");
+    listaLeads.innerHTML = "";
 
-    for (let i = 0; i < leadsList.length; i++) {
+    // criar cópia para não mexer no array original
+    const leadsOrdenadas = [...leadsList].sort((a, b) => {
+        return statusOptions.indexOf(a.estado) - statusOptions.indexOf(b.estado);
+    });
+
+    leadsOrdenadas.forEach(lead => {
         listaLeads.innerHTML += `
             <div class="lead-item">
-                <button onclick="abrirDetalhesLead(${leadsList[i].id})">
-                    <strong>${leadsList[i].titulo}</strong> <h5>Estado: ${leadsList[i].estado}</h5>
+                <span class="estado">Estado: ${lead.estado}</span>
+                <button onclick="abrirDetalhesLead(${lead.id})">
+                    ${lead.titulo}
                 </button>
             </div>
         `;
-    }
-
+    });
 
 }
 
