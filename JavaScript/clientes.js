@@ -106,7 +106,7 @@ function listarClientes() {
     for (var i = 0; i < clienteList.length; i++) {
 
         listaClientes.innerHTML += `
-            <li>
+            <li class="cliente-item">
 
                 <button type="button" onclick="abrirDetalhesCliente(${i})"><strong>${clienteList[i].nome}</strong></button>
 
@@ -163,8 +163,8 @@ function editarCliente(index) {
     <input id="clienteEmpresa" type="text" value="${cliente.empresa}">
     <br><br>
 
-    <button type="button" onclick="guardarCliente(${index})">Guardar</button>
-    <button onclick="window.location.href='dashboard.html#clientes'"><img src="/imagens/voltar.jpg" alt="icon" class="icon">Cancelar</button>
+    <button type="button" onclick="guardarCliente(${index})"><img src="/imagens/guardar.jpg" alt="icon" class="icon">Guardar</button>
+    <button onclick="window.location.href='dashboard.html#clientes'"><img src="/imagens/cancelar.jpg" alt="icon" class="icon">Cancelar</button>
     `;
 }
            

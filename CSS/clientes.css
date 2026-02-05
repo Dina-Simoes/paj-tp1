@@ -16,3 +16,17 @@
   vertical-align: middle;
   margin-right: 5px;
 }
+
+.cliente-item button {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0;
+}
+
+.cliente-item button:hover {
+    background-color: #a33636;
+  }

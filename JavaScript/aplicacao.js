@@ -48,7 +48,7 @@ function loadHeader(page) {
                 </div>
 
                 <div class="header-welcome">
-                    <span class="Welcome">Welcome ${user}</span>
+                    <strong><span class="Welcome">Welcome ${user}</span></strong>
                 </div>
             </header>
         `;
@@ -107,7 +107,7 @@ function loadNovoLead() {
     <br><br>
 
     <button type="button" onclick="adicionarLead()"><img src="/imagens/guardar.jpg" alt="icon" class="icon">Guardar</button>
-    <button type="button" onclick="loadLeads()"><img src="/imagens/remover.jpg" alt="icon" class="icon">Cancelar</button>
+    <button type="button" onclick="loadLeads()"><img src="/imagens/cancelar.jpg" alt="icon" class="icon">Cancelar</button>
 
     `;
 }
