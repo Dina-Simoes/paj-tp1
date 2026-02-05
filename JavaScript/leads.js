@@ -11,10 +11,6 @@ let leadsList = new Array();
 
 const statusOptions = [ "Novo","Em análise","Proposta","Ganho","Perdido"];
 
-//
-
-
-
 
 // Função para gerar ID único para cada lead de forma incremental
 
@@ -145,9 +141,14 @@ function listarLeads() {
     leadsOrdenadas.forEach(lead => {
         listaLeads.innerHTML += `
             <div class="lead-item">
-                <span class="estado">Estado: ${lead.estado}</span>
+                
                 <button onclick="abrirDetalhesLead(${lead.id})">
+                    <div class="leadLeft">
                     ${lead.titulo}
+                    </div>
+                    <div class="leadRight">
+                    <span class="estado">(Estado: ${lead.estado})</span>
+                    </div>
                 </button>
             </div>
         `;
