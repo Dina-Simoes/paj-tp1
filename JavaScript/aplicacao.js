@@ -67,9 +67,14 @@ function loadFooter() {
 function loadLeads() {
     content.innerHTML = `
     <h2>Leads</h2>
+    <br>
+    <label for="filtroEstado">Filtrar por estado:</label>
+    <select id="filtroEstado">
+    <option value="">Todos</option>
+    </select>
 
     <ul id="listaLeads"></ul>
-
+    <br>
     <button type="button" onclick="loadNovoLead()">Adicionar Lead</button>
     `;
 
