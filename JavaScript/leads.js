@@ -9,7 +9,11 @@ let leadsList = new Array();
 
 // opções de estado para as leads
 
-const statusOptions = ["Novo", "Em análise", "Proposta", "Ganho", "Perdido"];
+const statusOptions = [ "Novo","Em análise","Proposta","Ganho","Perdido"];
+
+//
+
+
 
 
 // Função para gerar ID único para cada lead de forma incremental
@@ -89,6 +93,44 @@ function mostrarDetalhesLead(id) {
     `;
 }
 
+// Função para preencher preencher os filtros com as opções disponivéis
+
+function preencherFiltroEstados() {
+    const select = document.getElementById("filtroEstado");
+    select.innerHTML = `<option value="">Todos</option>`;
+
+    statusOptions.forEach(estado => {
+        select.innerHTML += `<option value="${estado}">${estado}</option>`;
+    });
+}
+
+// Função para listar as leads por estado
+
+function listarLeadsPorEstado(estado) {
+    const listaLeads = document.getElementById("listaLeads");
+    listaLeads.innerHTML = "";
+
+    const filtradas = leadsList.filter(l => l.estado === estado);
+
+    if (filtradas.length === 0) {
+        listaLeads.innerHTML = "<p>Sem leads neste estado</p>";
+        return;
+    }
+
+    filtradas.forEach(lead => {
+        listaLeads.innerHTML += `
+            <div class="lead-item">
+                <button onclick="abrirDetalhesLead(${lead.id})">
+                    <strong>${lead.titulo}</strong>
+                </button>
+            </div>
+        `;
+    });
+}
+
+
+
+
 // Função para listar as leads
 
 function listarLeads() {
@@ -104,6 +146,8 @@ function listarLeads() {
             </div>
         `;
     }
+
+
 }
 
 
@@ -133,12 +177,17 @@ function carregarLeads() {
     const dados = getLeads();
     if (dados) {
         leadsList = dados;
+        
     }
+
 }
+
+// Função para extrair as Leads da local storage
 
 function getLeads(){
     return JSON.parse(localStorage.getItem("leadsList"));
 }
+
 
 
 function init(){

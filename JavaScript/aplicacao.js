@@ -78,7 +78,20 @@ function loadLeads() {
     <button type="button" onclick="loadNovoLead()">Adicionar Lead</button>
     `;
 
+    preencherFiltroEstados();
     listarLeads();
+
+    const filtro = document.getElementById("filtroEstado");
+    filtro.addEventListener("change", () => {
+        const estadoSelecionado = filtro.value;
+
+        if (estadoSelecionado === "") {
+            listarLeads();
+        } else {
+            listarLeadsPorEstado(estadoSelecionado);
+        }
+    });
+    
 }
 
 function loadNovoLead() {
