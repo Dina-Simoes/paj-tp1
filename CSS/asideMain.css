@@ -19,7 +19,7 @@
 }
 
 .sidebar button:hover {
-    background-color: #70490e;
+    background-color: #e09729;
 }
 
 
@@ -27,4 +27,14 @@ main {
     padding: 20px; 
     grid-column: 2;
     grid-row: 2;
+}
+
+.dashboard-home {
+    text-align: center;
+    margin-top: 80px;
+    color: #333;
+}
+
+.dashboard-home h2 {
+    margin-bottom: 10px;
 }

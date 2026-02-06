@@ -141,15 +141,10 @@ function listarLeads() {
     leadsOrdenadas.forEach(lead => {
         listaLeads.innerHTML += `
             <div class="lead-item">
-                
-                <button onclick="abrirDetalhesLead(${lead.id})">
-                    <div class="leadLeft">
-                    ${lead.titulo}
-                    </div>
-                    <div class="leadRight">
-                    <span class="estado">(Estado: ${lead.estado})</span>
-                    </div>
-                </button>
+        <button class="lead-btn" onclick="abrirDetalhesLead(${lead.id})">
+            <span class="lead-titulo">${lead.titulo}</span>
+            <span class="lead-estado">Estado: ${lead.estado}</span>
+        </button>
             </div>
         `;
     });
@@ -232,9 +227,9 @@ function init(){
 
     <br><br>
 
-    <button onclick="guardarEdicao(${lead.id})">Guardar</button>
-    <button onclick="removerLead(${lead.id})">Remover</button>
-    <button onclick="window.location.href='dashboard.html#leads'">Voltar</button>
+    <button onclick="guardarEdicao(${lead.id})"><img src="/imagens/editar.jpg" alt="icon" class="icon">Guardar</button>
+    <button onclick="removerLead(${lead.id})"><img src="/imagens/remover.jpg" alt="icon" class="icon">Remover</button>
+    <button onclick="window.location.href='dashboard.html#leads'"><img src="/imagens/voltar.jpg" alt="icon" class="icon">Voltar</button>
     `
 }
 
@@ -242,6 +237,8 @@ function getQueryParam(name, url = window.location.href) {
   const params = new URL(url).searchParams;
   return params.has(name) ? params.get(name) : null;
 }
+
+
 
 
 

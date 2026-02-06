@@ -38,7 +38,7 @@ function loadHeader(page) {
             <header class="header-app">
                 <div class="header-container">
                     <div class="header-left">
-                        <img src="/imagens/favicon1.png" class="logo">
+                        <button id="home-btn"  onclick="'window.location.href=dashboard.html'"><img src="/imagens/favicon1.png" class="logo"></button>
                         <h1>Customer Relationship Management</h1>
                     </div>
                 
@@ -75,7 +75,7 @@ function loadLeads() {
 
     <ul id="listaLeads"></ul>
     <br>
-    <button type="button" onclick="loadNovoLead()">Adicionar Lead</button>
+    <button type="button" onclick="loadNovoLead()"><img src="/imagens/adicionar.jpg" alt="icon" class="icon">Adicionar Lead</button>
     `;
 
     preencherFiltroEstados();
@@ -187,6 +187,15 @@ function loadTarefas() {
     `;
 }
 
+function loadDashboardHome() {
+    content.innerHTML = `
+        <section class="dashboard-home">
+            <h2>Bem-vindo ao CRM</h2>
+            <p>Seleciona uma opção no menu lateral para começar.</p>
+        </section>
+    `;
+}
+
 // Função para inicializar a aplicação
 
 window.onload = function() {
@@ -194,6 +203,7 @@ window.onload = function() {
     loadFooter();
     carregarClientes();
     carregarLeads();
+    loadDashboardHome();
     
 }
 
