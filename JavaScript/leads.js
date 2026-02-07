@@ -1,5 +1,7 @@
 // ficheiro responsável pela gestão de leads (adicionar, listar por estado, editar e remover) com persistência em localStorage
 
+// const { act } = require("react");
+
 // objeto lead
 var lead = {titulo : "", descricao : "", estado : ""};
 
@@ -36,12 +38,18 @@ function criarLead(titulo, descricao) {
 // Função para adicionar uma lead
 
 function adicionarLead() {
-    titulo = document.getElementById("leadTitulo").value;
-    descricao = document.getElementById("leadDescricao").value;
-    const lead = criarLead(titulo, descricao);
-    leadsList.push(lead);
+    const titulo = document.getElementById("leadTitulo").value;
+    const descricao = document.getElementById("leadDescricao").value;
+
+    if (!titulo.trim() || !descricao.trim()) {
+        alert("Por favor, preencha os campos de título e descrição.");
+        return;
+    }
+
+    const novaLead = criarLead(titulo, descricao);
+    leadsList.push(novaLead);
     guardarLeads();
-    console.log("Lead adicionada:", lead);
+    console.log("Lead adicionada:", novaLead);
     loadLeads();
 }
 
@@ -58,9 +66,15 @@ function guardarEdicao(id) {
     const lead = leadsList.find(l => l.id == id);
     if (!lead) return;
 
-    lead.titulo = document.getElementById("editTitulo").value;
-    lead.descricao = document.getElementById("editDescricao").value;
-    lead.estado = document.getElementById("editEstado").value;
+    const titulo = document.getElementById("editTitulo").value;
+    const descricao = document.getElementById("editDescricao").value;
+    const estado = document.getElementById("editEstado").value;
+
+    if (!titulo || !descricao || !estado) return;
+
+    lead.titulo = titulo;
+    lead.descricao = descricao;
+    lead.estado = estado;
 
     guardarLeads();
 
@@ -191,7 +205,6 @@ function mostrarDetalhesLead(){
     }
 
     detalhesDiv.innerHTML = `
-        <h2>Detalhes da Lead</h2>
 
         <p><strong>ID:</strong> ${lead.id}</p>
         <p><strong>Título:</strong> ${lead.titulo}</p>
@@ -219,13 +232,13 @@ function editarLead(id) {
 
   detalhesDiv.innerHTML = `
     <label>Título</label><br>
-    <input type="text" id="editTitulo" value="${lead.titulo}"><br><br>
+    <input required type="text" id="editTitulo" value="${lead.titulo}"><br><br>
 
     <label>Descrição</label><br>
-    <textarea id="editDescricao">${lead.descricao}</textarea><br><br>
+    <textarea required id="editDescricao">${lead.descricao}</textarea><br><br>
 
     <label>Estado</label><br>
-    <select id="editEstado">
+    <select required id="editEstado">
       ${statusOptions.map(s =>
         `<option value="${s}" ${s === lead.estado ? "selected" : ""}>${s}</option>`
       ).join("")}
@@ -233,34 +246,87 @@ function editarLead(id) {
 
     <br><br>
 
-    <button class="btn" type="button" onclick="guardarEdicao(${lead.id})">
+    <button id="btnGuardarEdicaoLead" class="btn" disabled type="button" onclick="guardarEdicao(${lead.id})">
       <img src="/imagens/guardar.jpg" alt="icon" class="icon">Guardar
     </button>
+
     <button class="btn" type="button" onclick="mostrarDetalhesLead()">
       <img src="/imagens/cancelar.jpg" alt="icon" class="icon">Cancelar
     </button>
   `;
+
+  ativarValidacaoEdicaoLead(lead);
+
 }
+
+
+// Função para que desativa o botão Guardar enquanto os campos de título e descrição não estão preenchidos
+function ativarValidacaoNovaLead() {
+
+  // Vai buscar o input do título, a descrição e o botão Guardarpelo id
+  const titulo = document.getElementById("leadTitulo");
+  const descricao = document.getElementById("leadDescricao");
+  const btnGuardar = document.getElementById("btnGuardarLead");
+
+  // Se algum dos elementos não existir no DOM, sai da função
+  if (!titulo || !descricao || !btnGuardar) return;
+
+  // Função que verifica se os campos estão preenchidos
+  const validar = () => {
+
+    // Verifica se os dois campos têm texto; trim() - ignora espaços em branco, devolve true ou false
+    const camposNaoVazios = titulo.value.trim() !== "" && descricao.value.trim() !== "";
+
+    // se camposNaoVazios o botão fica ativo; senão, o botão fica desativo
+    btnGuardar.disabled = !camposNaoVazios;
+  };
+
+  // Sempre que o utilizador escreve no campo título e no campo descrição, executa a função validar()
+  titulo.addEventListener("input", validar);
+  descricao.addEventListener("input", validar);
+
+  validar();
+}
+
+function ativarValidacaoEdicaoLead(leadOriginal) {
+
+  const titulo = document.getElementById("editTitulo");
+  const descricao = document.getElementById("editDescricao");
+  const estado = document.getElementById("editEstado");
+  const btn = document.getElementById("btnGuardarEdicaoLead");
+
+  if (!titulo || !descricao || !estado || !btn) return;
+
+  const validar = () => {
+
+    const t = titulo.value.trim();
+    const d = descricao.value.trim();
+    const e = estado.value;
+
+    // Todos os campos têm de estar preenchidos
+    const preenchido = t !== "" && d !== "" && e !== "";
+
+    // Verifica se houve alterações
+    const mudou =
+      t !== leadOriginal.titulo ||
+      d !== leadOriginal.descricao ||
+      e !== leadOriginal.estado;
+
+    // Botão só ativa se ambas forem verdade
+    btn.disabled = !(preenchido && mudou);
+  };
+
+  titulo.addEventListener("input", validar);
+  descricao.addEventListener("input", validar);
+  estado.addEventListener("change", validar);
+
+  validar(); // estado inicial
+}
+
+
 
 
 function getQueryParam(name, url = window.location.href) {
   const params = new URL(url).searchParams;
   return params.has(name) ? params.get(name) : null;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -99,17 +99,20 @@ function loadNovoLead() {
     <h2>Nova Lead</h2>
 
     <label>Título</label>
-    <input id="leadTitulo" type="text">
+    <input id="leadTitulo" type="text" required>
     <br><br>
 
     <label>Descrição</label>
-    <input id="leadDescricao" type="text">
+    <textarea id="leadDescricao" required></textarea>
     <br><br>
 
-    <button class="btn" type="button" onclick="adicionarLead()"><img src="/imagens/guardar.jpg" alt="icon" class="icon">Guardar</button>
+    <button id="btnGuardarLead" class="btn" disabled type="button" onclick="adicionarLead()"><img src="/imagens/guardar.jpg" alt="icon" class="icon">Guardar</button>
+
     <button class="btn" type="button" onclick="loadLeads()"><img src="/imagens/cancelar.jpg" alt="icon" class="icon">Cancelar</button>
 
     `;
+    // Ativa a função para validar os campos de título e descrição e desativar o botão Guardar enquanto os campos não estão preenchidos
+    ativarValidacaoNovaLead();
 }
 
 // Funções para carregar os Clientes

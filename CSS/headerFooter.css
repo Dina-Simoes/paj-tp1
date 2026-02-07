@@ -85,6 +85,13 @@ footer {
     transform: scale(1.03);
 }
 
+.btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+  filter: grayscale(20%);
+}
+
+
 
 
 
