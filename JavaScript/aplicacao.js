@@ -48,7 +48,7 @@ function loadHeader(page) {
                 </div>
 
                 <div class="header-welcome">
-                    <strong><span class="Welcome">Welcome ${user}</span></strong>
+                    <strong><span class="Welcome">Bem-vindo ${user}</span></strong>
                 </div>
             </header>
         `;
@@ -206,7 +206,10 @@ window.onload = function() {
     loadFooter();
     carregarClientes();
     carregarLeads();
-    // loadDashboardHome();
+
+    if (window.location.pathname.includes("dashboard")) {
+    loadDashboardHome();
+    }
     
 }
 
