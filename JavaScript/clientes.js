@@ -38,13 +38,13 @@ function guardarCliente(index = null) {
     // verifica se os campos obrigatórios estão preenchidos: nome empresa e pelo menos um contacto (email ou telefone)
     // trim() remove espaços em branco no início e no fim da string, ex: quando o utilizador insere apenas espaços
     if (nome.trim() === "" || empresa.trim() === "" || (email.trim() === "" && telefone.trim() === "")) {
-        alert("Por favor, preencha os campos obrigatórios: Nome, Empresa e pelo menos um contacto (Email ou Telefone).");
-        return; // 
+        return; 
     }
 
     // se o index for null => o cliente ainda não existe, é um novo cliente
     if (index === null) {
     adicionarCliente(nome, email, telefone, empresa);
+    alert("Cliente adicionado com sucesso!");
     console.log("Lista de clientes após adição:", clienteList);
 
     } else {
@@ -56,6 +56,7 @@ function guardarCliente(index = null) {
 
     // atualiza no localStorage: setItem()
     localStorage.setItem("clientes", JSON.stringify(clienteList));
+    alert("Cliente editado com sucesso!");
 
     console.log("Cliente editado:", clienteList[index]);
     }
@@ -91,7 +92,6 @@ function mostrarDetalhesCliente() {
         <button class="btn" type="button" onclick="editarCliente(${index})"><img src="/imagens/editar.jpg" alt="icon" class="icon">Editar</button>
         <button class="btn" type="button" onclick="removerCliente(${index})"><img src="/imagens/remover.jpg" alt="icon" class="icon">Remover</button>
         <button class="btn" onclick="window.location.href='dashboard.html#clientes'"><img src="/imagens/voltar.jpg" alt="icon" class="icon">Voltar</button>
-
     
     `;
     
@@ -106,10 +106,9 @@ function listarClientes() {
     for (var i = 0; i < clienteList.length; i++) {
 
         listaClientes.innerHTML += `
+
             <li class="cliente-item">
-
                 <button class = "cliente-item-btn" type="button" onclick="abrirDetalhesCliente(${i})"><strong>${clienteList[i].nome}</strong></button>
-
             </li>
             `;
     }
@@ -130,12 +129,12 @@ function removerCliente(index) {
 
         clienteList.splice(index, 1); // Remove o cliente do array  
 
-        localStorage.setItem("clientes", JSON.stringify(clienteList)); // Atualiza o localStorage
+        localStorage.setItem("clientes", JSON.stringify(clienteList)); 
+        alert("Cliente removido com sucesso!");
 
-// ====== >>>>>      confirmar remoção
         console.log("Cliente removido:", clienteList[index]); 
 
-        listarClientes(); // Atualiza a lista de clientes
+        listarClientes();
     }
 
 }
@@ -163,9 +162,14 @@ function editarCliente(index) {
     <input id="clienteEmpresa" type="text" value="${cliente.empresa}">
     <br><br>
 
-    <button class="btn" type="button" onclick="guardarCliente(${index})"><img src="/imagens/guardar.jpg" alt="icon" class="icon">Guardar</button>
+    <button id="btnGuardarClienteEdicao" class="btn" disabled type="button" onclick="guardarCliente(${index})"><img src="/imagens/guardar.jpg" alt="icon" class="icon">Guardar</button>
+
+
     <button class="btn" onclick="window.location.href='dashboard.html#clientes'"><img src="/imagens/cancelar.jpg" alt="icon" class="icon">Cancelar</button>
     `;
+
+    ativarValidacaoEdicaoCliente(cliente);
+
 }
            
 
@@ -181,4 +185,73 @@ function carregarClientes() {
         clienteList = dados;
     }
 }
+// função que ativa/desativa o botºao Guardar na página ao adicionar novo cliente, dependendo se os campos obrigatórios estão preenchidos ou não
+function ativarValidacaoNovoCliente() {
+
+    // vai buscar os elemntos de input, pelo id, do nome, email, telefone, empresa e o botão Guardar 
+  const nome = document.getElementById("clienteNome");
+  const email = document.getElementById("clienteEmail");
+  const telefone = document.getElementById("clienteTelefone");
+  const empresa = document.getElementById("clienteEmpresa");
+  // vai buscar o botão para controlar o seu estado dinamicamente
+  const btn = document.getElementById("btnGuardarCliente");
+
+  if (!nome || !email || !telefone || !empresa || !btn) return;
+
+  const validar = () => {
+    // função verifica se os elemntos obrigatórios foram preenchidos ou um dos contactos. Se sim, ativa o botão Guardar.
+    const nomeOk = nome.value.trim() !== "";
+    const empresaOk = empresa.value.trim() !== "";
+    const contactoOk =
+      email.value.trim() !== "" || telefone.value.trim() !== "";
+
+    // o botão ativa qd os 3 campos obrigatorios forem preenchidos
+    btn.disabled = !(nomeOk && empresaOk && contactoOk);
+  };
+
+  // sempre que houver input nos campos, chama a função validar para verificar se o botão Guardar deve ser ativado ou desativado
+  nome.addEventListener("input", validar);
+  email.addEventListener("input", validar);
+  telefone.addEventListener("input", validar);
+  empresa.addEventListener("input", validar);
+
+  validar();
+}
+
+// função que ativa/desativa o botão Guardar na página ao editar cliente, dependendo se os campos obrigatórios estão preenchidos e se houve alterações nos campos
+function ativarValidacaoEdicaoCliente(clienteOriginal) {
+
+  // vai buscar os inputs dos campos nome, email, telefone, empresa  
+  const nome = document.getElementById("clienteNome");
+  const email = document.getElementById("clienteEmail");
+  const telefone = document.getElementById("clienteTelefone");
+  const empresa = document.getElementById("clienteEmpresa");
+  // vai buscar o input do botão Guardar para controlar o seu estado dinamicamente
+  const btn = document.getElementById("btnGuardarClienteEdicao");
+
+  if (!nome || !email || !telefone || !empresa || !btn) return;
+
+  const validar = () => {
+
+    const nomeVal = nome.value.trim();
+    const emailVal = email.value.trim();
+    const telefoneVal = telefone.value.trim();
+    const empresaVal = empresa.value.trim();
+
+    const preenchido = nomeVal !== "" && empresaVal !== "" && (emailVal !== "" || telefoneVal !== "");
+
+    const mudou = nomeVal !== clienteOriginal.nome || emailVal !== clienteOriginal.email || telefoneVal !== clienteOriginal.telefone || empresaVal !== clienteOriginal.empresa;
+
+    btn.disabled = !(preenchido && mudou);
+  };
+
+  nome.addEventListener("input", validar);
+  email.addEventListener("input", validar);
+  telefone.addEventListener("input", validar);
+  empresa.addEventListener("input", validar);
+
+  validar();
+}
+
+
 

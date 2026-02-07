@@ -134,8 +134,9 @@ function loadNovoCliente() {
   content.innerHTML = `
     <h2>Novo Cliente</h2>
 
+    <!-- required indica que o campo é obrigatório (em Nome e Empresa) -->
     <label>Nome</label>
-    <input id="clienteNome" type="text">
+    <input id="clienteNome" type="text" required>
     <br><br>
 
     <label>Email</label>
@@ -147,12 +148,17 @@ function loadNovoCliente() {
     <br><br>
 
     <label>Empresa</label>
-    <input id="clienteEmpresa" type="text">
+    <input id="clienteEmpresa" type="text" required>
     <br><br>
 
-    <button class="btn" type="button" onclick="guardarCliente()"><img src="/imagens/guardar.jpg" alt="icon" class="icon">Guardar</button>
+    <!-- O botão Guardar só é ativado quando os campos obrigatórios estão preenchidos, por defeito está disabled -->
+    <button id="btnGuardarCliente" class="btn" disabled type="button" onclick="guardarCliente()"><img src="/imagens/guardar.jpg" alt="icon" class="icon">Guardar</button>
+
     <button class="btn" type="button" onclick="loadClientes()"><img src="/imagens/remover.jpg" alt="icon" class="icon">Cancelar</button>
   `;
+
+  ativarValidacaoNovoCliente();
+
 }
 
 // Funções de login e logout

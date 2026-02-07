@@ -162,6 +162,7 @@ function removerLead(id) {
 
     leadsList = leadsList.filter(l => l.id != id);
     guardarLeads();
+    alert("Cliente removido com sucesso!");
 
     window.location.href = "dashboard.html#leads";
 }
