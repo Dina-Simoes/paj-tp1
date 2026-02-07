@@ -27,11 +27,22 @@
     content: normal;
 }
 
-.cliente-item .btn {
+.cliente-item .cliente-item-btn {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    padding: 12px 20px;
+    border-radius: 999px;
+    background: #050a9e;  
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.cliente-item .cliente-item-btn:hover {
+    background-color: #e09729;
 }
 
 
