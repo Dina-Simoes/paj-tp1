@@ -65,28 +65,8 @@ function guardarEdicao(id) {
     guardarLeads();
 
     alert("Lead atualizada com sucesso");
-}
 
-// Função para mostrar detalhes de uma lead
-
-function mostrarDetalhesLead(id) {
-    const lead = leadsList.find(l => l.id === id);
-
-    if (!lead) {
-        content.innerHTML = "<p>Lead não encontrada</p>";
-        return;
-    }
-
-    content.innerHTML = `
-        <h2>Detalhes da Lead</h2>
-
-        <p><strong>ID:</strong> ${lead.id}</p>
-        <p><strong>Título:</strong> ${lead.titulo}</p>
-        <p><strong>Descrição:</strong> ${lead.descrição}</p>
-        <p><strong>Estado:</strong> ${lead.estado}</p>
-
-        <button onclick="loadLeads()">Voltar</button>
-    `;
+    mostrarDetalhesLead();
 }
 
 // Função para preencher preencher os filtros com as opções disponivéis
@@ -116,7 +96,7 @@ function listarLeadsPorEstado(estado) {
     filtradas.forEach(lead => {
         listaLeads.innerHTML += `
             <div class="lead-item">
-                <button onclick="abrirDetalhesLead(${lead.id})">
+                <button class="btn" onclick="abrirDetalhesLead(${lead.id})">
                     <strong>${lead.titulo}</strong>
                 </button>
             </div>
@@ -191,27 +171,53 @@ function getLeads(){
 
 
 
-function init(){
+function mostrarDetalhesLead(){
 
     carregarLeads();
 
-    const id = getQueryParam("id");
+    const id = Number(getQueryParam("id"));
+    const lead = leadsList.find(l => l.id == id);
 
     console.log(id);
     console.log(getLeads());
 
-    const lead = getLeads().find(l => l.id == id);
 
-    const content = document.getElementById("content");
+    const detalhesDiv = document.getElementById("detalhesLead");
+    if (!detalhesDiv) return;
 
     if (!lead) {
         alert("Lead não encontrada");
         return;
     }
 
-    content.innerHTML = `
+    detalhesDiv.innerHTML = `
         <h2>Detalhes da Lead</h2>
 
+        <p><strong>ID:</strong> ${lead.id}</p>
+        <p><strong>Título:</strong> ${lead.titulo}</p>
+        <p><strong>Descrição:</strong> ${lead.descricao}</p>
+        <p><strong>Estado:</strong> ${lead.estado}</p>
+
+        <br>
+
+        <button class="btn" type="button" onclick="editarLead(${lead.id})">
+        <img src="/imagens/editar.jpg" alt="icon" class="icon">Editar
+        </button>
+        <button class="btn" type="button" onclick="removerLead(${lead.id})">
+        <img src="/imagens/remover.jpg" alt="icon" class="icon">Remover
+        </button>
+        <button class="btn" type="button" onclick="window.location.href='dashboard.html#leads'">
+        <img src="/imagens/voltar.jpg" alt="icon" class="icon">Voltar
+        </button>
+    `;
+}
+
+function editarLead(id) {
+  const lead = leadsList.find(l => l.id === id);
+  const detalhesDiv = document.getElementById("detalhesLead");
+  if (!detalhesDiv || !lead) return;
+
+  detalhesDiv.innerHTML = `
     <label>Título</label><br>
     <input type="text" id="editTitulo" value="${lead.titulo}"><br><br>
 
@@ -220,18 +226,22 @@ function init(){
 
     <label>Estado</label><br>
     <select id="editEstado">
-        ${statusOptions.map(s =>
-            `<option value="${s}" ${s === lead.estado ? "selected" : ""}>${s}</option>`
-        ).join("")}
+      ${statusOptions.map(s =>
+        `<option value="${s}" ${s === lead.estado ? "selected" : ""}>${s}</option>`
+      ).join("")}
     </select>
 
     <br><br>
 
-    <button onclick="guardarEdicao(${lead.id})"><img src="/imagens/editar.jpg" alt="icon" class="icon">Guardar</button>
-    <button onclick="removerLead(${lead.id})"><img src="/imagens/remover.jpg" alt="icon" class="icon">Remover</button>
-    <button onclick="window.location.href='dashboard.html#leads'"><img src="/imagens/voltar.jpg" alt="icon" class="icon">Voltar</button>
-    `
+    <button class="btn" type="button" onclick="guardarEdicao(${lead.id})">
+      <img src="/imagens/guardar.jpg" alt="icon" class="icon">Guardar
+    </button>
+    <button class="btn" type="button" onclick="mostrarDetalhesLead()">
+      <img src="/imagens/cancelar.jpg" alt="icon" class="icon">Cancelar
+    </button>
+  `;
 }
+
 
 function getQueryParam(name, url = window.location.href) {
   const params = new URL(url).searchParams;

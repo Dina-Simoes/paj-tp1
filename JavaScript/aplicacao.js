@@ -43,7 +43,7 @@ function loadHeader(page) {
                     </div>
                 
                     <div class="header-right">
-                        <button class="logout-btn" onclick="logout()"><img src="/imagens/logout.jpg" alt="icon" class="icon">Logout</button>
+                        <button class="btn" onclick="logout()"><img src="/imagens/logout.jpg" alt="icon" class="icon">Logout</button>
                     </div>
                 </div>
 
@@ -75,7 +75,7 @@ function loadLeads() {
 
     <ul id="listaLeads"></ul>
     <br>
-    <button type="button" onclick="loadNovoLead()"><img src="/imagens/adicionar.jpg" alt="icon" class="icon">Adicionar Lead</button>
+    <button class="btn" type="button" onclick="loadNovoLead()"><img src="/imagens/adicionar.jpg" alt="icon" class="icon">Adicionar Lead</button>
     `;
 
     preencherFiltroEstados();
@@ -106,8 +106,8 @@ function loadNovoLead() {
     <input id="leadDescricao" type="text">
     <br><br>
 
-    <button type="button" onclick="adicionarLead()"><img src="/imagens/guardar.jpg" alt="icon" class="icon">Guardar</button>
-    <button type="button" onclick="loadLeads()"><img src="/imagens/cancelar.jpg" alt="icon" class="icon">Cancelar</button>
+    <button class="btn" type="button" onclick="adicionarLead()"><img src="/imagens/guardar.jpg" alt="icon" class="icon">Guardar</button>
+    <button class="btn" type="button" onclick="loadLeads()"><img src="/imagens/cancelar.jpg" alt="icon" class="icon">Cancelar</button>
 
     `;
 }
@@ -121,7 +121,7 @@ function loadClientes() {
     <!-- lista não ordenada de clientes -->
     <ul id="listaClientes"></ul> 
 
-    <button type="button"onclick="loadNovoCliente()"><img src="/imagens/adicionar.jpg" alt="icon" class="icon">Adicionar Cliente</button>
+    <button class="btn" type="button"onclick="loadNovoCliente()"><img src="/imagens/adicionar.jpg" alt="icon" class="icon">Adicionar Cliente</button>
     `;
     
     listarClientes();
@@ -147,8 +147,8 @@ function loadNovoCliente() {
     <input id="clienteEmpresa" type="text">
     <br><br>
 
-    <button type="button" onclick="guardarCliente()"><img src="/imagens/guardar.jpg" alt="icon" class="icon">Guardar</button>
-    <button type="button" onclick="loadClientes()"><img src="/imagens/remover.jpg" alt="icon" class="icon">Cancelar</button>
+    <button class="btn" type="button" onclick="guardarCliente()"><img src="/imagens/guardar.jpg" alt="icon" class="icon">Guardar</button>
+    <button class="btn" type="button" onclick="loadClientes()"><img src="/imagens/remover.jpg" alt="icon" class="icon">Cancelar</button>
   `;
 }
 
@@ -203,7 +203,7 @@ window.onload = function() {
     loadFooter();
     carregarClientes();
     carregarLeads();
-    loadDashboardHome();
+    // loadDashboardHome();
     
 }
 

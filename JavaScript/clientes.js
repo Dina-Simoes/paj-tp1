@@ -88,9 +88,9 @@ function mostrarDetalhesCliente() {
         
         <br>
 
-        <button type="button" onclick="editarCliente(${index})"><img src="/imagens/editar.jpg" alt="icon" class="icon">Editar</button>
-        <button type="button" onclick="removerCliente(${index})"><img src="/imagens/remover.jpg" alt="icon" class="icon">Remover</button>
-        <button onclick="window.location.href='dashboard.html#clientes'"><img src="/imagens/voltar.jpg" alt="icon" class="icon">Voltar</button>
+        <button class="btn" type="button" onclick="editarCliente(${index})"><img src="/imagens/editar.jpg" alt="icon" class="icon">Editar</button>
+        <button class="btn" type="button" onclick="removerCliente(${index})"><img src="/imagens/remover.jpg" alt="icon" class="icon">Remover</button>
+        <button class="btn" onclick="window.location.href='dashboard.html#clientes'"><img src="/imagens/voltar.jpg" alt="icon" class="icon">Voltar</button>
 
     
     `;
@@ -108,7 +108,7 @@ function listarClientes() {
         listaClientes.innerHTML += `
             <li class="cliente-item">
 
-                <button type="button" onclick="abrirDetalhesCliente(${i})"><strong>${clienteList[i].nome}</strong></button>
+                <button class = "btn" type="button" onclick="abrirDetalhesCliente(${i})"><strong>${clienteList[i].nome}</strong></button>
 
             </li>
             `;
@@ -163,8 +163,8 @@ function editarCliente(index) {
     <input id="clienteEmpresa" type="text" value="${cliente.empresa}">
     <br><br>
 
-    <button type="button" onclick="guardarCliente(${index})"><img src="/imagens/guardar.jpg" alt="icon" class="icon">Guardar</button>
-    <button onclick="window.location.href='dashboard.html#clientes'"><img src="/imagens/cancelar.jpg" alt="icon" class="icon">Cancelar</button>
+    <button class="btn" type="button" onclick="guardarCliente(${index})"><img src="/imagens/guardar.jpg" alt="icon" class="icon">Guardar</button>
+    <button class="btn" onclick="window.location.href='dashboard.html#clientes'"><img src="/imagens/cancelar.jpg" alt="icon" class="icon">Cancelar</button>
     `;
 }
            
