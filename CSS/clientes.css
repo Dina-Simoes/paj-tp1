@@ -1,7 +1,9 @@
 #listaClientes {
   list-style: none;
   padding-left: 0;
+  margin-left: 3%;
 }
+
 #listaClientes li {
   background-color: #f9f9f9;
   margin-bottom: 10px;

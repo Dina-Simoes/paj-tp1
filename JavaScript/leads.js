@@ -49,7 +49,7 @@ function adicionarLead() {
     const novaLead = criarLead(titulo, descricao);
     leadsList.push(novaLead);
     guardarLeads();
-    console.log("Lead adicionada:", novaLead);
+    alert("Lead adicionada com sucesso!")
     loadLeads();
 }
 
@@ -182,8 +182,6 @@ function carregarLeads() {
 function getLeads(){
     return JSON.parse(localStorage.getItem("leadsList"));
 }
-
-
 
 function mostrarDetalhesLead(){
 
@@ -322,8 +320,6 @@ function ativarValidacaoEdicaoLead(leadOriginal) {
 
   validar(); // estado inicial
 }
-
-
 
 
 function getQueryParam(name, url = window.location.href) {

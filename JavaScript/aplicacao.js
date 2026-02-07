@@ -38,7 +38,7 @@ function loadHeader(page) {
             <header class="header-app">
                 <div class="header-container">
                     <div class="header-left">
-                        <button id="home-btn"  onclick="'window.location.href=dashboard.html'"><img src="/imagens/favicon1.png" class="logo"></button>
+                        <img src="/imagens/favicon1.png" class="logo">
                         <h1>Customer Relationship Management</h1>
                     </div>
                 
@@ -120,10 +120,10 @@ function loadNovoLead() {
 function loadClientes() {
     content.innerHTML = `
     <h2>Clientes</h2>
-
+    <br>
     <!-- lista não ordenada de clientes -->
     <ul id="listaClientes"></ul> 
-
+    <br>
     <button class="btn" type="button"onclick="loadNovoCliente()"><img src="/imagens/adicionar.jpg" alt="icon" class="icon">Adicionar Cliente</button>
     `;
     
