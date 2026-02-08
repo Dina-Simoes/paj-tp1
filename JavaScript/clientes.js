@@ -10,11 +10,13 @@ let clienteList = new Array();
 
 // Função para adicionar um cliente
 function adicionarCliente(nome, email, telefone, empresa) {
+
     var novoCliente = Object.create(cliente);
     novoCliente.nome = nome;
     novoCliente.email = email;
     novoCliente.telefone = telefone;
     novoCliente.empresa = empresa;
+
     clienteList.push(novoCliente); 
 
     // guarda no localStorage
@@ -23,9 +25,10 @@ function adicionarCliente(nome, email, telefone, empresa) {
     clienteList.sort(function(a, b) {
         return a.nome.localeCompare(b.nome);
     });
-    localStorage.setItem("clientes", JSON.stringify(clienteList));
 
+    localStorage.setItem("clientes", JSON.stringify(clienteList));
     console.log("Cliente adicionado:", novoCliente);
+
 }
 
 function guardarCliente(index = null) {
@@ -41,11 +44,27 @@ function guardarCliente(index = null) {
         return; 
     }
 
+    // uso de expressões regex para validar numero de telefone e email
+    // telefone deve ter 9 digitos e começar por 2 ou 9
+    if (telefone !=="" && !/^[29][0-9]{8}$/.test(telefone)) {
+        alert("Digite um número de telefone válido.");
+        return;
+    }
+
+    // email deve ter algo != de espaçp ou @ antes do @, depois do @ deve ter algo != de espaço ou @, depois um ponto e depois algo != de espaço ou @
+    if (email !=="" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        alert("Digite um email válido.");
+        return;
+    }
+
+
     // se o index for null => o cliente ainda não existe, é um novo cliente
     if (index === null) {
-    adicionarCliente(nome, email, telefone, empresa);
-    alert("Cliente adicionado com sucesso!");
-    console.log("Lista de clientes após adição:", clienteList);
+
+        adicionarCliente(nome, email, telefone, empresa);
+        
+        alert("Cliente adicionado com sucesso!");
+        console.log("Lista de clientes após adição:", clienteList);
 
     } else {
     // editar cliente já existente
